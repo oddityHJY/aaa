@@ -188,3 +188,57 @@
                 <div class="candle"></div>
             </div>
         </div>
+        <div class="message">
+            <h2>亲爱的奋斗者</h2>
+            <p>在这个特别的日子里，愿所有美好如期而至！</p >
+            <p>🎂 愿你的每一天都充满阳光与欢笑</p >
+            <p>🎁 愿所有愿望都能实现</p >
+            <p>✨ 愿你永远保持灿烂的笑容</p >
+            <p style="color: #ff6b6b; font-weight: bold;">❤ 来自“小西岭” ❤</p >
+        </div>
+    </div>
+
+    <audio autoplay loop>
+        <source src="https://cdn.pixabay.com/download/audio/2022/03/07/audio_2d4c7d94c4.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // 修复的爱心生成逻辑
+        function createHearts() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤';
+            heart.classList.add('heart');
+            heart.style.left = Math.random() * 95 + '%';
+            heart.style.animationDuration = Math.random() * 2 + 1.5 + 's';
+            document.getElementById('hearts').appendChild(heart);
+            
+            setTimeout(() => {
+                heart.parentNode?.removeChild(heart);
+            }, 5000);
+        }
+
+        // 使用requestAnimationFrame优化性能
+        let lastTime = 0;
+        function animateHearts(timestamp) {
+            if (timestamp - lastTime > 300) {
+                createHearts();
+                lastTime = timestamp;
+            }
+            requestAnimationFrame(animateHearts);
+        }
+        requestAnimationFrame(animateHearts);
+
+        // 添加点击/触摸事件
+        document.addEventListener('click', function() {
+            for(let i = 0; i < 15; i++) {
+                setTimeout(createHearts, i * 50);
+            }
+        });
+
+        // 防止移动端滚动
+        document.body.addEventListener('touchmove', function(e) {
+            e.preventDefault();
+        }, { passive: false });
+    </script>
+</body>
+</html>
